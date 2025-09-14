@@ -30,6 +30,7 @@ export const CustomTable = () => {
 				setInputRows={setInputRows}
 				handleIconClick={handleIconClick}
 			/>
+			
 			<div className="overflow-x-auto">
 				<DataTable
 					value={artworks}
@@ -39,19 +40,20 @@ export const CustomTable = () => {
 						handleSelectionChange(e.value as Artist[] | null);
 					}}
 					scrollable
-					scrollHeight="400px"
-					// responsiveLayout="scroll"
+					scrollHeight="530px"
 				>
 					<Column
 						selectionMode="multiple"
 						headerStyle={{ width: "3rem" }}
 						style={{ width: "3rem" }}
 					/>
+					
 					<Column 
 						field="title" 
 						header="Title" 
 						style={{ minWidth: "150px" }}
 					/>
+					
 					<Column
 						field="origin"
 						header="Place Of Origin"
@@ -60,6 +62,7 @@ export const CustomTable = () => {
 							minWidth: "120px"
 						}}
 					/>
+					
 					<Column
 						field="artist_display"
 						header="Artist Display"
@@ -74,11 +77,13 @@ export const CustomTable = () => {
 							minWidth: "150px"
 						}}
 					/>
+					
 					<Column 
 						field="inscriptions" 
 						header="Inscriptions" 
 						style={{ minWidth: "120px" }}
 					/>
+					
 					<Column
 						field="start_date"
 						header="Start Date"
@@ -87,6 +92,7 @@ export const CustomTable = () => {
 							minWidth: "100px"
 						}}
 					/>
+					
 					<Column
 						field="end_date"
 						header="End Date"
@@ -102,13 +108,14 @@ export const CustomTable = () => {
 									colSpan={7}
 									style={{ textAlign: "center", padding: "2rem" }}
 								>
-									Loading...
+									Loading artworks...
 								</td>
 							</tr>
 						</tbody>
 					)}
 				</DataTable>
 			</div>
+			
 			<Paginator
 				first={(page - 1) * 12}
 				rows={12}

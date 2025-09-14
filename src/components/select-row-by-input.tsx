@@ -23,30 +23,32 @@ export const SelectRowByInput: React.FC<SelectRowByInputProps> = ({
 			<span
 				className="pi pi-chevron-down text-lg md:text-xl cursor-pointer"
 				onClick={handleIconClick}
-				aria-label="Open panel"
+				aria-label="Open selection panel"
 			/>
+			
 			<span className="font-bold text-base md:text-lg">
 				Artworks Table
 			</span>
+			
 			<OverlayPanel ref={op} dismissable>
 				<div className="flex flex-column gap-3" style={{ minWidth: 220 }}>
 					<InputText
 						value={inputRows}
 						onChange={(e) => setInputRows(e.target.value)}
-						placeholder="select rows..."
+						placeholder="How many rows to select?"
 						className="w-full"
-                        onKeyDown={(e) => {
-                            if(e.key === "Enter") {
-                                onSelectRows()
-                            }
-                        }}
+						onKeyDown={(e) => {
+							if (e.key === "Enter") {
+								onSelectRows();
+							}
+						}}
 					/>
 					<button
 						type="button"
 						className="p-button p-component align-item-center w-full"
 						onClick={onSelectRows}
 					>
-						Save
+						Select Rows
 					</button>
 				</div>
 			</OverlayPanel>
