@@ -19,35 +19,22 @@ export const SelectRowByInput: React.FC<SelectRowByInputProps> = ({
 	handleIconClick,
 }) => {
 	return (
-		<div
-			style={{
-				display: "flex",
-				alignItems: "center",
-				marginBottom: 8,
-			}}
-		>
+		<div className="flex align-items-center mb-2 flex-wrap gap-2">
 			<span
-				className="pi pi-chevron-down"
-				style={{ fontSize: 20, cursor: "pointer", marginRight: 8 }}
+				className="pi pi-chevron-down text-lg md:text-xl cursor-pointer"
 				onClick={handleIconClick}
 				aria-label="Open panel"
 			/>
-			<span style={{ fontWeight: "bold", fontSize: 18 }}>
+			<span className="font-bold text-base md:text-lg">
 				Artworks Table
 			</span>
 			<OverlayPanel ref={op} dismissable>
-				<div
-					style={{
-						display: "flex",
-						flexDirection: "column",
-						gap: 12,
-						minWidth: 220,
-					}}
-				>
+				<div className="flex flex-column gap-3" style={{ minWidth: 220 }}>
 					<InputText
 						value={inputRows}
 						onChange={(e) => setInputRows(e.target.value)}
 						placeholder="select rows..."
+						className="w-full"
                         onKeyDown={(e) => {
                             if(e.key === "Enter") {
                                 onSelectRows()
@@ -56,7 +43,7 @@ export const SelectRowByInput: React.FC<SelectRowByInputProps> = ({
 					/>
 					<button
 						type="button"
-						className="p-button p-component align-item-center"
+						className="p-button p-component align-item-center w-full"
 						onClick={onSelectRows}
 					>
 						Save

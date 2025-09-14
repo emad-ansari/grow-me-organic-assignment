@@ -13,16 +13,16 @@ export const CustomTable = () => {
 		loading,
 		inputRows,
 		totalPages,
+		selectedArtworks,
 		onPageChange,
 		onSelectRows,
-		handleIconClick,
 		setInputRows,
-		setSelectedArtworks,
-		selectedArtworks,
+		handleIconClick,
+		handleSelectionChange,
 	} = useDataTable();
 
 	return (
-		<div className="card">
+		<div className="card w-full">
 			<SelectRowByInput
 				op={op}
 				onSelectRows={onSelectRows}
@@ -30,66 +30,91 @@ export const CustomTable = () => {
 				setInputRows={setInputRows}
 				handleIconClick={handleIconClick}
 			/>
-			<DataTable
-				value={artworks}
-				className="datatable-responsive"
-				selection={selectedArtworks}
-				onSelectionChange={(e) => {
-					setSelectedArtworks(e.value as Artist[] | null);
-				}}
-			>
-				<Column
-					selectionMode="multiple"
-					headerStyle={{ width: "3rem" }}
-				/>
-				<Column field="title" header="Title" />
-				<Column
-					field="origin"
-					header="Place Of Origin"
-					style={{ whiteSpace: "nowrap" }}
-				/>
-				<Column
-					field="artist_display"
-					header="Artist Display"
-					body={(rowData: Artist) => (
-						<span title={rowData.artist_display}>
-							{rowData.artist_display}
-						</span>
-					)}
-					style={{
-						whiteSpace: "normal",
-						wordBreak: "break-word",
+			<div className="overflow-x-auto">
+				<DataTable
+					value={artworks}
+					className="datatable-responsive"
+					selection={selectedArtworks}
+					onSelectionChange={(e) => {
+						handleSelectionChange(e.value as Artist[] | null);
 					}}
-				/>
-				<Column field="inscriptions" header="Inscriptions" />
-				<Column
-					field="start_date"
-					header="Start Date"
-					style={{ whiteSpace: "nowrap" }}
-				/>
-				<Column
-					field="end_date"
-					header="End Date"
-					style={{ whiteSpace: "nowrap" }}
-				/>
-				{loading && (
-					<tbody>
-						<tr>
-							<td
-								colSpan={7}
-								style={{ textAlign: "center", padding: "2rem" }}
-							>
-								Loading...
-							</td>
-						</tr>
-					</tbody>
-				)}
-			</DataTable>
+					scrollable
+					scrollHeight="400px"
+					// responsiveLayout="scroll"
+				>
+					<Column
+						selectionMode="multiple"
+						headerStyle={{ width: "3rem" }}
+						style={{ width: "3rem" }}
+					/>
+					<Column 
+						field="title" 
+						header="Title" 
+						style={{ minWidth: "150px" }}
+					/>
+					<Column
+						field="origin"
+						header="Place Of Origin"
+						style={{ 
+							whiteSpace: "nowrap",
+							minWidth: "120px"
+						}}
+					/>
+					<Column
+						field="artist_display"
+						header="Artist Display"
+						body={(rowData: Artist) => (
+							<span title={rowData.artist_display}>
+								{rowData.artist_display}
+							</span>
+						)}
+						style={{
+							whiteSpace: "normal",
+							wordBreak: "break-word",
+							minWidth: "150px"
+						}}
+					/>
+					<Column 
+						field="inscriptions" 
+						header="Inscriptions" 
+						style={{ minWidth: "120px" }}
+					/>
+					<Column
+						field="start_date"
+						header="Start Date"
+						style={{ 
+							whiteSpace: "nowrap",
+							minWidth: "100px"
+						}}
+					/>
+					<Column
+						field="end_date"
+						header="End Date"
+						style={{ 
+							whiteSpace: "nowrap",
+							minWidth: "100px"
+						}}
+					/>
+					{loading && (
+						<tbody>
+							<tr>
+								<td
+									colSpan={7}
+									style={{ textAlign: "center", padding: "2rem" }}
+								>
+									Loading...
+								</td>
+							</tr>
+						</tbody>
+					)}
+				</DataTable>
+			</div>
 			<Paginator
 				first={(page - 1) * 12}
 				rows={12}
 				totalRecords={totalPages}
 				onPageChange={onPageChange}
+				className="mt-3"
 			/>
 		</div>
 	);
